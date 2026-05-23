@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FaWhatsapp, FaTelegramPlane, FaAmazon } from "react-icons/fa";
@@ -7,6 +9,13 @@ import Marquee from "react-fast-marquee";
 export default function Home() {
   const whatsappUrl = "https://chat.whatsapp.com/HwCYtgrMAL2IfKFHRbvxJr?mode=gi_t";
   const telegramUrl = "https://t.me/cacapromo_br";
+
+  const trackClick = (platform: 'WhatsApp' | 'Telegram') => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('trackCustom', `Click${platform}`, { platform });
+      window.fbq('track', 'Contact', { content_name: platform });
+    }
+  };
 
   const features = [
     {
@@ -114,6 +123,7 @@ export default function Home() {
             <a 
               href={whatsappUrl} 
               target="_blank"
+              onClick={() => trackClick('WhatsApp')}
               className="flex items-center justify-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-emerald-700 transition-all shadow-md active:transform active:scale-95"
             >
               <FaWhatsapp className="w-6 h-6" />
@@ -123,6 +133,7 @@ export default function Home() {
             <a 
               href={telegramUrl} 
               target="_blank"
+              onClick={() => trackClick('Telegram')}
               className="flex items-center justify-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-indigo-700 transition-all shadow-md active:transform active:scale-95"
             >
               <FaTelegramPlane className="w-6 h-6" />
@@ -251,7 +262,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {testimonials.map((t, i) => (
                 <div key={i} className="bg-white/60 backdrop-blur-xl p-8 rounded-3xl border border-white shadow-sm">
-                  <p className="text-slate-600 italic mb-6">"{t.text}"</p>
+                  <p className="text-slate-600 italic mb-6">&quot;{t.text}&quot;</p>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-bold text-sm">
                       {t.name[0]}
@@ -325,11 +336,19 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-              <a href={whatsappUrl} className="bg-emerald-500 hover:bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20">
+              <a 
+                href={whatsappUrl} 
+                onClick={() => trackClick('WhatsApp')}
+                className="bg-emerald-500 hover:bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20"
+              >
                 <FaWhatsapp className="w-6 h-6" />
                 Quero o WhatsApp
               </a>
-              <a href={telegramUrl} className="bg-white hover:bg-slate-100 text-indigo-600 px-10 py-5 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20">
+              <a 
+                href={telegramUrl} 
+                onClick={() => trackClick('Telegram')}
+                className="bg-white hover:bg-slate-100 text-indigo-600 px-10 py-5 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20"
+              >
                 <FaTelegramPlane className="w-6 h-6" />
                 Quero o Telegram
               </a>
