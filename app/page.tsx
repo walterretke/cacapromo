@@ -2,13 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FaWhatsapp, FaTelegramPlane, FaAmazon } from "react-icons/fa";
+import { FaWhatsapp, FaTelegramPlane, FaAmazon, FaClock, FaUsers, FaExclamationTriangle } from "react-icons/fa";
 import { SiShopee } from "react-icons/si";
 import Marquee from "react-fast-marquee";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const whatsappUrl = "https://chat.whatsapp.com/HwCYtgrMAL2IfKFHRbvxJr?mode=gi_t";
   const telegramUrl = "https://t.me/cacapromo_br";
+
+  const [timeLeft, setTimeLeft] = useState({ minutes: 14, seconds: 59 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
+        if (prev.minutes > 0) return { minutes: prev.minutes - 1, seconds: 59 };
+        return { minutes: 14, seconds: 59 }; // Reset for demo purposes
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   const trackClick = (platform: 'WhatsApp' | 'Telegram') => {
     if (typeof window !== 'undefined' && window.fbq) {
@@ -79,6 +96,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 antialiased relative overflow-x-hidden">
+      {/* Urgency Banner */}
+      <div className="bg-indigo-600 text-white py-2 px-4 text-center text-xs md:text-sm font-bold relative z-50">
+        <div className="flex items-center justify-center gap-4">
+          <span className="flex items-center gap-1"><FaClock className="animate-pulse" /> OFERTA POR TEMPO LIMITADO</span>
+          <span className="hidden md:inline">|</span>
+          <span className="flex items-center gap-1 uppercase tracking-wider"><FaUsers /> Grupo em Alta Demanda</span>
+        </div>
+      </div>
+
       {/* Apple-style Blurred Background Orbs */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-100/40 rounded-full blur-[120px] animate-pulse"></div>
@@ -114,9 +140,22 @@ export default function Home() {
             <span className="text-indigo-600">e compre com inteligência.</span>
           </h1>
           
-          <p className="text-slate-600 text-lg md:text-xl mb-10 max-w-xl mx-auto leading-relaxed">
-            Junte-se a <span className="font-bold text-indigo-600">milhares de pessoas</span> que recebem as melhores ofertas verificadas, direto no celular. 100% gratuito.
+          <p className="text-slate-600 text-lg md:text-xl mb-6 max-w-xl mx-auto leading-relaxed">
+            Junte-se a <span className="font-bold text-indigo-600">milhares de pessoas</span> que recebem as melhores ofertas verificadas, direto no celular.
           </p>
+
+          {/* Price Anchoring & Urgency Triggers */}
+          <div className="flex flex-col items-center mb-8">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-slate-400 line-through text-lg">R$ 97,00/mês</span>
+              <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-bold text-sm animate-bounce">GRÁTIS HOJE</span>
+            </div>
+            <div className="flex items-center gap-4 text-slate-500 text-sm font-medium">
+              <span className="flex items-center gap-1 text-rose-600 font-bold"><FaExclamationTriangle className="w-3 h-3" /> Vagas Limitadas</span>
+              <span>•</span>
+              <span className="flex items-center gap-1"><FaClock /> Expira em {timeLeft.minutes}:{timeLeft.seconds.toString().padStart(2, '0')}</span>
+            </div>
+          </div>
 
           {/* Secure CTAs */}
           <div className="flex flex-col gap-4 w-full max-w-sm px-4 mb-10">
@@ -124,8 +163,9 @@ export default function Home() {
               href={whatsappUrl} 
               target="_blank"
               onClick={() => trackClick('WhatsApp')}
-              className="flex items-center justify-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-emerald-700 transition-all shadow-md active:transform active:scale-95"
+              className="flex items-center justify-center gap-3 bg-emerald-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-emerald-700 transition-all shadow-md active:transform active:scale-95 group relative overflow-hidden"
             >
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-[-20deg]"></div>
               <FaWhatsapp className="w-6 h-6" />
               <span>Acessar Grupo no WhatsApp</span>
             </a>
@@ -134,8 +174,9 @@ export default function Home() {
               href={telegramUrl} 
               target="_blank"
               onClick={() => trackClick('Telegram')}
-              className="flex items-center justify-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-indigo-700 transition-all shadow-md active:transform active:scale-95"
+              className="flex items-center justify-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-indigo-700 transition-all shadow-md active:transform active:scale-95 group relative overflow-hidden"
             >
+              <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-[-20deg]"></div>
               <FaTelegramPlane className="w-6 h-6" />
               <span>Acessar Canal no Telegram</span>
             </a>
@@ -327,28 +368,41 @@ export default function Home() {
         <section className="w-full py-24 px-4 bg-indigo-600 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           <div className="max-w-4xl mx-auto text-center relative z-10">
+            <div className="inline-block bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold mb-8 animate-pulse border border-white/20 uppercase tracking-widest">
+              ⚡ Acesso sujeito a disponibilidade
+            </div>
+            
             <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
               Pare de queimar dinheiro <br/> 
               <span className="text-emerald-400">e comece a comprar com inteligência.</span>
             </h2>
-            <p className="text-indigo-100 text-xl mb-12 max-w-2xl mx-auto">
-              Junte-se a <span className="font-bold">milhares de pessoas</span> que já transformaram sua forma de consumir. O acesso é grátis, mas as ofertas são limitadas.
-            </p>
+            
+            <div className="flex flex-col items-center mb-10">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-indigo-200 line-through text-xl">R$ 97,00/mês</span>
+                <span className="bg-emerald-400 text-indigo-900 px-4 py-1.5 rounded-full font-black text-lg">GRÁTIS HOJE</span>
+              </div>
+              <p className="text-indigo-100 text-lg opacity-80">
+                A oferta expira em <span className="font-bold text-white">{timeLeft.minutes}:{timeLeft.seconds.toString().padStart(2, '0')}</span>
+              </p>
+            </div>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
               <a 
                 href={whatsappUrl} 
                 onClick={() => trackClick('WhatsApp')}
-                className="bg-emerald-500 hover:bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20"
+                className="bg-emerald-500 hover:bg-emerald-600 text-white px-10 py-5 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20 group relative overflow-hidden"
               >
+                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-[-20deg]"></div>
                 <FaWhatsapp className="w-6 h-6" />
                 Quero o WhatsApp
               </a>
               <a 
                 href={telegramUrl} 
                 onClick={() => trackClick('Telegram')}
-                className="bg-white hover:bg-slate-100 text-indigo-600 px-10 py-5 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20"
+                className="bg-white hover:bg-slate-100 text-indigo-600 px-10 py-5 rounded-2xl font-bold text-xl transition-all flex items-center justify-center gap-3 shadow-xl shadow-indigo-900/20 group relative overflow-hidden"
               >
+                <div className="absolute inset-0 bg-indigo-600/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-[-20deg]"></div>
                 <FaTelegramPlane className="w-6 h-6" />
                 Quero o Telegram
               </a>
