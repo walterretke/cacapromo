@@ -15,13 +15,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Grupos de Desconto WhatsApp e Telegram | Caça Promo - Histórico de Preços",
-  description: "Encontre os melhores grupos de telegram de desconto, grupos de desconto whatsapp e promoções exclusivas. Use nosso comparador e histórico de preços para economizar na Amazon, Shopee e Magalu.",
-  keywords: "grupos de telegram de desconto, grupos de desconto whatsapp, grupos com descontos, histórico de preços, comparador de preços, promoções hoje, cupons de desconto, ofertas amazon, promoções magalu, achadinhos shopee",
+  title: "Grupo de Desconto WhatsApp | Caça Promo",
+  description: "Entre no nosso grupo de WhatsApp e receba as melhores ofertas e promoções exclusivas.",
+  keywords: "grupo de whatsapp de desconto, promoções hoje, cupons de desconto, ofertas amazon, achadinhos shopee, achadinhos magalu",
   authors: [{ name: "Caça Promo" }],
   openGraph: {
-    title: "Grupos de Desconto WhatsApp e Telegram | Caça Promo",
-    description: "Economize agora com os melhores grupos de ofertas do Brasil.",
+    title: "Grupo de Desconto WhatsApp | Caça Promo",
+    description: "Entre agora no melhor grupo de ofertas do WhatsApp.",
     type: "website",
     locale: "pt_BR",
     images: ["/Logo.png"],
