@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function Home() {
-  const whatsappUrl = "https://chat.whatsapp.com/HwCYtgrMAL2IfKFHRbvxJr?mode=gi_t";
+  const whatsappUrl = "https://urlgeni.us/whatsapp/uBdHWI";
 
   const handleLinkClick = () => {
     if (typeof window !== "undefined" && window.fbq) {
