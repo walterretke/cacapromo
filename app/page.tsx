@@ -13,8 +13,13 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-white text-slate-900 p-6">
-      <div className="max-w-md w-full flex flex-col items-center text-center space-y-10">
+    <main className="flex flex-col items-center justify-center min-h-screen bg-white text-slate-900">
+      {/* Top Urgency Banner */}
+      <div className="fixed top-0 left-0 w-full bg-red-600 text-white py-2 px-4 text-center text-sm font-bold z-50 animate-fade-in">
+        Acesso gratuito por tempo limitado ⚠️
+      </div>
+
+      <div className="max-w-md w-full flex flex-col items-center text-center space-y-10 p-6 pt-16">
         
         {/* Logo Section */}
         <div className="relative w-28 h-28 animate-fade-in">
@@ -40,14 +45,20 @@ export default function Home() {
 
         {/* Button Section */}
         <div className="w-full animate-slide-up [animation-delay:400ms] opacity-0">
-          <a 
-            href={whatsappUrl}
-            onClick={handleLinkClick}
-            className="flex items-center justify-center gap-3 w-full bg-[#25D366] hover:bg-[#20ba5a] text-white px-8 py-5 rounded-2xl font-bold text-xl shadow-xl shadow-emerald-100 transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            <FaWhatsapp className="text-3xl" />
-            ENTRAR NO GRUPO
-          </a>
+          <div className="animate-shake">
+            <a 
+              href={whatsappUrl}
+              onClick={handleLinkClick}
+              className="flex items-center justify-center gap-3 w-full bg-[#25D366] hover:bg-[#20ba5a] text-white px-8 py-5 rounded-2xl font-bold text-xl shadow-xl shadow-emerald-100 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <FaWhatsapp className="text-3xl" />
+              ENTRAR NO GRUPO
+            </a>
+          </div>
+          
+          <p className="mt-4 text-red-600 font-bold text-base flex items-center justify-center gap-2">
+            🚨 Últimas vagas disponíveis
+          </p>
           
           <div className="mt-8 flex items-center justify-center gap-2 text-emerald-600 font-semibold text-sm">
             <span className="relative flex h-3 w-3">
