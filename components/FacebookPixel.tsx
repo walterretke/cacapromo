@@ -1,12 +1,12 @@
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import Script from 'next/script'
 
 const FB_PIXEL_ID = '1328059949423184'
 
-export const FacebookPixel = () => {
+const FacebookPixelComponent = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
@@ -46,5 +46,13 @@ export const FacebookPixel = () => {
         />
       </noscript>
     </>
+  )
+}
+
+export const FacebookPixel = () => {
+  return (
+    <Suspense fallback={null}>
+      <FacebookPixelComponent />
+    </Suspense>
   )
 }

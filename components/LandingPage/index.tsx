@@ -1,17 +1,14 @@
-﻿'use client';
+'use client';
 
 import { useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import { Hero } from './Hero';
-
-// Dynamically import heavy components to improve LCP and initial load
-const Ticker = dynamic(() => import('./Ticker').then(mod => mod.Ticker), { ssr: true });
-const Logos = dynamic(() => import('./Logos').then(mod => mod.Logos), { ssr: true });
-const Steps = dynamic(() => import('./Steps').then(mod => mod.Steps), { ssr: true });
-const Comparison = dynamic(() => import('./Comparison').then(mod => mod.Comparison), { ssr: true });
-const Testimonials = dynamic(() => import('./Testimonials').then(mod => mod.Testimonials), { ssr: true });
-const FinalCTA = dynamic(() => import('./FinalCTA').then(mod => mod.FinalCTA), { ssr: true });
-const Footer = dynamic(() => import('./Footer').then(mod => mod.Footer), { ssr: true });
+import { Ticker } from './Ticker';
+import { Logos } from './Logos';
+import { Steps } from './Steps';
+import { Comparison } from './Comparison';
+import { Testimonials } from './Testimonials';
+import { FinalCTA } from './FinalCTA';
+import { Footer } from './Footer';
 
 export default function LandingPage() {
   const WHATSAPP_URL = "https://urlgeni.us/whatsapp/uBdHWI";
@@ -24,21 +21,26 @@ export default function LandingPage() {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-        }
-      });
-    }, { threshold: 0.1 });
+    // Small delay to ensure all components are rendered (especially if they were dynamic before)
+    const timeoutId = setTimeout(() => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+          }
+        });
+      }, { threshold: 0.1 });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      
+      return () => observer.disconnect();
+    }, 100);
 
-    return () => observer.disconnect();
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
-    <div className="bg-navy-primary text-white selection:bg-blue-primary/30">
+    <div className="bg-navy-primary text-white selection:bg-blue-primary/30 min-h-screen">
       <Hero onCtaClick={handleCtaClick} />
       <Ticker />
       <Logos />

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Image from 'next/image';
 import { FaWhatsapp, FaLock } from 'react-icons/fa';
@@ -13,7 +13,7 @@ export const FinalCTA = ({ onCtaClick }: FinalCTAProps) => {
       <div className="relative w-full lg:w-1/2 h-[400px] lg:h-full min-h-[400px] bg-navy-primary overflow-hidden">
         <Image 
           src="/cacador.png" 
-          alt="CaÃ§ador" 
+          alt="Caçador" 
           fill
           className="object-cover object-top"
         />
@@ -21,13 +21,13 @@ export const FinalCTA = ({ onCtaClick }: FinalCTAProps) => {
       </div>
 
       <div className="w-full lg:w-1/2 p-10 lg:p-20 text-center lg:text-left">
-        <span className="slabel">DecisÃ£o sua</span>
+        <span className="slabel">Decisão sua</span>
           <h2 className="reveal font-anton text-[clamp(32px,4.5vw,56px)] leading-[1.1] uppercase mb-6 tracking-wide">
-          SÃ“ DEPENDE DE VOCÃŠ:<br />ESPERAR A SORTE OU<br />
-          <em className="text-blue-primary not-italic underline decoration-wavy underline-offset-8 decoration-blue-primary/40">CAÃ‡AR COM O MELHOR.</em>
+          SÓ DEPENDE DE VOCÊ:<br />ESPERAR A SORTE OU<br />
+          <em className="text-blue-primary not-italic underline decoration-wavy underline-offset-8 decoration-blue-primary/40">CAÇAR COM O MELHOR.</em>
         </h2>
           <p className="reveal text-muted-text text-lg mb-10 max-w-[500px] mx-auto lg:mx-0">
-          Enquanto vocÃª lÃª isso, alguÃ©m acabou de pegar um bug de preÃ§o que vocÃª perdeu. Entre agora e nÃ£o deixe a prÃ³xima oportunidade passar.
+          Enquanto você lê isso, alguém acabou de pegar um bug de preço que você perdeu. Entre agora e não deixe a próxima oportunidade passar.
         </p>
 
         <button 
@@ -46,4 +46,3 @@ export const FinalCTA = ({ onCtaClick }: FinalCTAProps) => {
     </section>
   );
 };
-
