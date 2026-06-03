@@ -1,35 +1,20 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
-  --blue: #2d6a4f;
-  --blue-glow: rgba(45, 106, 79, 0.35);
-  --blue-dim: rgba(45, 106, 79, 0.12);
-  --navy: #05091A;
-  --navy2: #080E1F;
-  --card: #0C1428;
-  --card2: #0A1020;
-  --white: #fff;
-  --muted: #7A93BC;
-  --background: var(--navy);
-  --foreground: var(--white);
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
 @theme inline {
-  --font-anton: var(--font-anton);
-  --font-plus: var(--font-plus-jakarta-sans);
-  --color-blue-primary: var(--blue);
-  --color-blue-glow: var(--blue-glow);
-  --color-blue-dim: var(--blue-dim);
-  --color-navy-primary: var(--navy);
-  --color-navy-secondary: var(--navy2);
-  --color-card-primary: var(--card);
-  --color-card-secondary: var(--card2);
-  --color-muted-text: var(--muted);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slideUp {
@@ -43,88 +28,23 @@
   75% { transform: translateX(4px); }
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .3; }
-}
-
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 var(--blue-glow); }
-  50% { box-shadow: 0 0 0 12px rgba(45, 106, 79, 0); }
-}
-
-@keyframes tickScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@keyframes logosScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 .animate-shake {
   animation: shake 0.5s ease-in-out infinite;
-  animation-delay: 2s;
+  animation-delay: 2s; /* Start shaking after initial entrance */
 }
 
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out forwards;
+  animation-fill-mode: both;
 }
 
 .animate-slide-up {
   animation: slideUp 0.8s ease-out forwards;
-}
-
-.animate-blink {
-  animation: blink 2s infinite;
-}
-
-.animate-pulse-custom {
-  animation: pulse 2.5s infinite;
-}
-
-.animate-ticker {
-  animation: tickScroll 30s linear infinite;
-}
-
-.animate-logos {
-  animation: logosScroll 22s linear infinite;
+  animation-fill-mode: both;
 }
 
 body {
-  background: var(--navy);
-  color: var(--white);
-  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity .65s ease, transform .65s ease;
-}
-
-.reveal.in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Base styles for the adapted landing page */
-.stitle {
-  font-family: var(--font-anton), sans-serif;
-  font-size: clamp(44px, 5.5vw, 78px);
-  line-height: 1.02;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-}
-
-.slabel {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--blue);
-  display: block;
-  margin-bottom: 10px;
-}
-

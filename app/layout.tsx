@@ -1,32 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { FacebookPixel } from "@/components/FacebookPixel";
-
-const anton = Anton({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-anton",
-  display: "swap",
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta-sans",
-  display: "swap",
-});
+import { Suspense } from "react";
 
 export const viewport: Viewport = {
-  themeColor: "#2d6a4f",
+  themeColor: "#059669",
 };
 
 export const metadata: Metadata = {
-  title: "Caçador de Promoções | Onde o melhor desconto é a caça",
+  title: "Grupo de Desconto WhatsApp | Caça Promo",
   description: "Entre no nosso grupo de WhatsApp e receba as melhores ofertas e promoções exclusivas.",
   keywords: "grupo de whatsapp de desconto, promoções hoje, cupons de desconto, ofertas amazon, achadinhos shopee, achadinhos magalu",
-  authors: [{ name: "Caçador de Promoções" }],
+  authors: [{ name: "Caça Promo" }],
+  other: {
+    "facebook-domain-verification": "your-code-here", // Opcional
+  },
   openGraph: {
-    title: "Caçador de Promoções | Onde o melhor desconto é a caça",
+    title: "Grupo de Desconto WhatsApp | Caça Promo",
     description: "Entre agora no melhor grupo de ofertas do WhatsApp.",
     type: "website",
     locale: "pt_BR",
@@ -40,16 +30,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${anton.variable} ${plusJakartaSans.variable} h-full antialiased`}
-    >
+    <html lang="pt-BR" className="h-full antialiased">
       <head>
         <link rel="preconnect" href="https://connect.facebook.net" />
         <link rel="preconnect" href="https://chat.whatsapp.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://chat.whatsapp.com" />
       </head>
-      <body className="min-h-full flex flex-col font-sans bg-[#05091A] text-white">
-        <FacebookPixel />
+      <body className="min-h-full flex flex-col font-sans">
+        <Suspense fallback={null}>
+          <FacebookPixel />
+        </Suspense>
         {children}
       </body>
     </html>
